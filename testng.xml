@@ -2,7 +2,7 @@
 <suite name="MyTestSuite">
     <test name="MyTestCase">
         <classes>
-            <class name="" />
+            <class name="com.restassured.tests.PetStoreTests" />
         </classes>
     </test>
 
