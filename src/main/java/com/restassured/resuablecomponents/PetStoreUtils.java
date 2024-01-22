@@ -1,4 +1,7 @@
 package com.restassured.resuablecomponents;
 
-public class PetStoreUtils {
+import com.restassured.baseactions.CommonActions;
+
+public class PetStoreUtils extends CommonActions {
+
 }

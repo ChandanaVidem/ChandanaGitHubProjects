@@ -16,38 +16,38 @@ import org.testng.asserts.SoftAssert;
 public class Base {
     public static ExtentReports extent;
     public static ExtentTest extentTest;
+    public static ExtentTest node;
 
     @BeforeSuite(alwaysRun = true)
     public void startReport() {
         extent = new ExtentReports();
         ExtentSparkReporter spark = new ExtentSparkReporter("TestReport.html");
         extent.attachReporter(spark);
-
     }
 
     @BeforeTest
     public void createReportsForTests(ITestContext context) {
         extentTest = extent.createTest(context.getName());
-        extentTest.assignAuthor(context.getCurrentXmlTest().getParameter("author"));
     }
 
     @BeforeMethod
-    public void getAnnotationDetails(Method m, ITestResult result)
-    {
-       extentTest.assignCategory(m.getAnnotation(Test.class).groups());
-
+    public void getAnnotationDetails(Method m, ITestContext context) {
+        extentTest.assignAuthor(context.getCurrentXmlTest().getParameter("author"));
+        extentTest.assignCategory(m.getAnnotation(Test.class).groups());
+        node = extentTest.createNode(m.getAnnotation(Test.class).testName());
     }
+
     @AfterMethod
     public void getTestStatus(Method m, ITestResult result) {
-        if (result.getStatus()==ITestResult.FAILURE)
-        {
+        if (result.getStatus() == ITestResult.FAILURE) {
             extentTest.fail("Test Failed");
+        } else {
+            extentTest.pass(m.getName() + " is passed");
         }
     }
 
     @AfterSuite
     public void endReport() {
         extent.flush();
-
     }
 }
