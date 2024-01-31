@@ -21,7 +21,7 @@ public class Base {
     @BeforeSuite(alwaysRun = true)
     public void startReport() {
         extent = new ExtentReports();
-        ExtentSparkReporter spark = new ExtentSparkReporter("TestReport.html");
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/TestReport.html");
         extent.attachReporter(spark);
     }
 
