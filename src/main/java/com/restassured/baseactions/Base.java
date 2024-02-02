@@ -32,7 +32,7 @@ public class Base {
 
     @BeforeMethod
     public void getAnnotationDetails(Method m, ITestContext context) {
-        extentTest.assignAuthor(context.getCurrentXmlTest().getParameter("author"));
+        //extentTest.assignAuthor(context.getCurrentXmlTest().getParameter("author"));
         extentTest.assignCategory(m.getAnnotation(Test.class).groups());
         node = extentTest.createNode(m.getAnnotation(Test.class).testName());
     }
